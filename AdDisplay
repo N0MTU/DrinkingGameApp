@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Advertisements;
+
+public class AdDisplay : MonoBehaviour
+{
+
+    public string myGameIdAndroid = "xxxxxxx"; //replace with your game ID
+    public string myGameIdIOS = "xxxxxxx";
+    public string adUnitIdAndroid = "Banner_Android";
+    public string adUnitIdIOS = "Banner_iOS";
+    public string myAdUnitId;
+    public bool adStarted;
+    private bool testMode = true;
+    public string placementId = "bannerPlacement";
+
+    // Start is called before the first frame update
+    void Start()
+    {
+#if UNITY_IOS
+	Advertisement.Initialize(myGameIdIOS, testMode);
+	myAdUnitId = adUnitIdIOS;
+#else
+        Advertisement.Initialize(myGameIdAndroid, testMode);
+        myAdUnitId = adUnitIdAndroid;
+#endif 
+        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Advertisement.isInitialized && !adStarted)
+        {
+            Advertisement.Banner.Load(myAdUnitId);
+            Advertisement.Banner.Show(myAdUnitId);
+            adStarted = true;
+        }
+
+    }
+}
