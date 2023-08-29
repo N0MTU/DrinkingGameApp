@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using UnityEngine.UI;
+using TMPro;
+
+public class TorD : MonoBehaviour
+{
+  private string fileNameT;
+    private string fileNameD;
+
+    private string[] lines;
+    private int currentLineIndex = -1;
+  public void NewTruth()
+    {
+        tdLogo.text = "Truth";
+        
+        lines = File.ReadAllLines(fileNameT);
+        int newLineIndex = currentLineIndex;
+        while (newLineIndex == currentLineIndex)
+        {
+            newLineIndex = Random.Range(0, lines.Length);
+        }
+        currentLineIndex = newLineIndex;
+        textElement.text = lines[currentLineIndex];
+    }
+
+    public void NewDare()
+    {
+        tdLogo.text = "Dare";
+        lines = File.ReadAllLines(fileNameD);
+        int newLineIndex = currentLineIndex;
+        while (newLineIndex == currentLineIndex)
+        {
+            newLineIndex = Random.Range(0, lines.Length);
+        }
+        currentLineIndex = newLineIndex;
+        textElement.text = lines[currentLineIndex];
+    }
+}
